@@ -1,0 +1,8 @@
+<h1>Editing Game</h1>
+
+<%= form_for @game, url: edit_game_path(@game), method: :put do |f| %>
+  <%= render 'form', game: @game, f: f %>
+<% end %>
+
+<%= link_to 'Show', @game %> |
+<%= link_to 'Back', root_path %>

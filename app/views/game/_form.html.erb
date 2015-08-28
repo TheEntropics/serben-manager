@@ -1,0 +1,39 @@
+<% if game.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+    <ul>
+    <% game.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :short_name %><br>
+  <%= f.text_field :short_name %>
+</div>
+<div class="field">
+  <%= f.label :start_script %><br>
+  <%= f.text_area :start_script %>
+</div>
+<div class="field">
+  <%= f.label :stop_script %><br>
+  <%= f.text_area :stop_script %>
+</div>
+<div class="field">
+  <%= f.label :status_script %><br>
+  <%= f.text_area :status_script %>
+</div>
+<div class="field">
+  <%= f.label :icon %><br>
+  <%= f.text_field :icon %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>

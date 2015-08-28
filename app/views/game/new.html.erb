@@ -1,0 +1,7 @@
+<h1>New Game</h1>
+
+<%= form_for @game, url: new_game_path(@game), method: :post do |f| %>
+  <%= render 'form', game: @game, f: f %>
+<% end %>
+
+<%= link_to 'Back', root_path %>

@@ -1,0 +1,17 @@
+<% if game.status[:online] != nil %>
+  <p>
+    Status:
+    <% if game.status[:online] %>
+                <span class="status-online">
+                  <%= image_tag asset_path('online.png'), class: ['status-image'] %> online
+                </span>
+    <% else %>
+                <span class="status-offline">
+                  <%= image_tag asset_path('offline.png'), class: ['status-image'] %> offline
+                </span>
+    <% end %>
+  </p>
+<% end %>
+<% game.status.except(:online).each do |value| %>
+  <p><%= value[0] %>: <%= value[1] %></p>
+<% end %>

@@ -1,0 +1,13 @@
+<a href="<%= game_path(game) %>" class="list-group-item">
+  <img src="icons/<%= game.icon %>" class="pull-left game-icon">
+
+  <div class="list-group-item-heading">
+    <h3><%= game.name %></h3>
+  </div>
+
+  <div class="list-group-item-body">
+    <%= render 'status', game: game %>
+  </div>
+
+  <div class="clearfix"></div>
+</a>
