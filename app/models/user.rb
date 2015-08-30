@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  has_many :authorizations
+
   def self.get_user(username, password)
     User.find_by(username: username).try(:authenticate, password)
   end

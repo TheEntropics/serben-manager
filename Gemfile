@@ -30,6 +30,11 @@ gem 'angularjs-rails'
 gem 'angular-rails-templates', '0.1.5'
 gem 'bootstrap-sass', '~> 3.2.0'
 
+gem 'pundit'
+
+gem 'carrierwave'
+gem 'rmagick'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -45,5 +50,7 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'pry-rails'
 end
 

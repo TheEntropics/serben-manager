@@ -1,6 +1,6 @@
 <h1>New Game</h1>
 
-<%= form_for @game, url: new_game_path(@game), method: :post do |f| %>
+<%= form_for @game, url: new_game_path(@game), method: :post, html: {multipart: true} do |f| %>
   <%= render 'form', game: @game, f: f %>
 <% end %>
 

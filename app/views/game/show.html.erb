@@ -2,10 +2,30 @@
 <div class="row">
   <div class="col-sm-3">
     <div class="thumbnail">
-      <img src="icons/<%= @game.icon %>" class="game-icon-big">
+      <img src="<%= @game.icon.url %>" class="game-icon-big">
     </div>
   </div>
   <div class="col-sm-9">
     <%= render 'status', game: @game %>
   </div>
 </div>
+<% if flash[:result] %>
+  <div class="alert alert-info">
+    <% flash[:result].each do |k| %>
+      <strong><%= k[0].to_s.humanize %></strong>: <%= k[1] %><br>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @policy.start? %>
+  <%= link_to 'Start', start_game_path(@game), method: :post, class: ['btn', 'btn-success'] %>
+<% end %>
+<% if @policy.stop? %>
+  <%= link_to 'Stop', stop_game_path(@game), method: :post, class: ['btn', 'btn-danger'] %>
+<% end %>
+<% if @policy.update? %>
+  <%= link_to 'Edit', edit_game_path(@game), class: ['btn', 'btn-warning'] %>
+<% end %>
+<% if @policy.destroy? %>
+  <%= link_to 'Destroy', game_path(@game), method: :delete, class: ['btn', 'btn-danger'], data: {confirm: "Are you sure?"} %>
+<% end %>

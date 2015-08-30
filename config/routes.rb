@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get '/:short_name', to: 'game#show', as: 'game'
   get '/:short_name/edit', to: 'game#edit', as: 'edit_game'
   put '/:short_name/edit', to: 'game#update'
+  post '/:short_name/start', to: 'game#start', as: 'start_game'
+  post '/:short_name/stop', to: 'game#stop', as: 'stop_game'
 end
