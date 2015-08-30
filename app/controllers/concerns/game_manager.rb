@@ -15,7 +15,7 @@ class GameManager
   def self.stop_game(game)
     status = {status: 'error'}
 
-    Rails.logger.info "Executing command: #{game.start_script}"
+    Rails.logger.info "Executing command: #{game.stop_script}"
     IO.popen(game.stop_script) do |f|
       output = f.readlines(nil)[0]
       result = JSON.parse(output, symbolize_names: true) rescue {}
@@ -28,7 +28,7 @@ class GameManager
   def self.get_status(game)
     status = { online: 'error' }
 
-    Rails.logger.info "Executing command: #{game.start_script}"
+    Rails.logger.info "Executing command: #{game.status_script}"
     IO.popen(game.status_script) do |f|
       output = f.readlines(nil)[0]
       result = JSON.parse(output, symbolize_names: true) rescue { online: 'error' }
