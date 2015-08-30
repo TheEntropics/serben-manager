@@ -17,3 +17,9 @@
 /tmp
 
 .idea/
+
+start.sh
+
+vendor/bundle
+public/assets
+public/icons

@@ -6,7 +6,7 @@ class GameManager
     IO.popen(game.start_script) do |f|
       output = f.readlines(nil)[0]
       result = JSON.parse(output, symbolize_names: true) rescue {}
-      result[:status] = 'unknown' if result[:online] == nil
+      result[:status] = 'unknown' if result[:status] == nil
       status = result
     end rescue nil
     status
@@ -19,7 +19,7 @@ class GameManager
     IO.popen(game.stop_script) do |f|
       output = f.readlines(nil)[0]
       result = JSON.parse(output, symbolize_names: true) rescue {}
-      result[:status] = 'unknown' if result[:online] == nil
+      result[:status] = 'unknown' if result[:status] == nil
       status = result
     end rescue nil
     status

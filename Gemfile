@@ -25,8 +25,6 @@ gem 'jbuilder', '~> 2.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'angularjs-rails'
-gem 'angular-rails-templates', '0.1.5'
 gem 'bootstrap-sass', '~> 3.2.0'
 
 gem 'pundit'
@@ -53,3 +51,4 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+gem 'rb-readline'
