@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829144156) do
+ActiveRecord::Schema.define(version: 20150831094710) do
 
   create_table "authorizations", force: :cascade do |t|
     t.integer  "user_id"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20150829144156) do
 
   add_index "authorizations", ["game_id"], name: "index_authorizations_on_game_id"
   add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id"
+
+  create_table "game_caches", force: :cascade do |t|
+    t.integer  "game_id"
+    t.text     "status"
+    t.boolean  "invalidated"
+    t.datetime "created_at"
+  end
+
+  add_index "game_caches", ["created_at"], name: "index_game_caches_on_created_at"
+  add_index "game_caches", ["game_id"], name: "index_game_caches_on_game_id"
 
   create_table "games", force: :cascade do |t|
     t.string   "name"

@@ -36,11 +36,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    angular-rails-templates (0.1.5)
-      railties (>= 3.1)
-      sprockets (~> 2)
-      tilt
-    angularjs-rails (1.4.4)
     arel (6.0.3)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
@@ -128,6 +123,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
+    rb-readline (0.5.1)
     ref (2.0.0)
     rmagick (2.15.4)
     sass (3.4.18)
@@ -176,8 +172,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  angular-rails-templates (= 0.1.5)
-  angularjs-rails
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0)
   byebug
@@ -189,6 +183,7 @@ DEPENDENCIES
   pry-rails
   pundit
   rails (= 4.2.1)
+  rb-readline
   rmagick
   sass-rails (~> 5.0)
   spring

@@ -3,7 +3,7 @@ class GameController < ApplicationController
   before_action :get_policy
 
   def show
-    @game.get_status
+    @game.get_status(false)
     @policy = GamePolicy.new(current_user, @game)
   end
 

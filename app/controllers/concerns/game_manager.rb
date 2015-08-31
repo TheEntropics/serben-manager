@@ -9,6 +9,8 @@ class GameManager
       result[:status] = 'unknown' if result[:status] == nil
       status = result
     end rescue nil
+    GameCache.get_cache(game).try :invalidate!
+    Rails.logger.info "Cache invalidated"
     status
   end
 
@@ -22,6 +24,8 @@ class GameManager
       result[:status] = 'unknown' if result[:status] == nil
       status = result
     end rescue nil
+    GameCache.get_cache(game).try :invalidate!
+    Rails.logger.info "Cache invalidated"
     status
   end
 

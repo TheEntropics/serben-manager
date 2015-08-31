@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_id: 1
+  status: MyText
+  invalidated: false
+  create_date: 2015-08-31 11:47:10
+
+two:
+  game_id: 1
+  status: MyText
+  invalidated: false
+  create_date: 2015-08-31 11:47:10
