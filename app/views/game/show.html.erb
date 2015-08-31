@@ -30,7 +30,9 @@
   <%= link_to 'Destroy', game_path(@game), method: :delete, class: ['btn', 'btn-danger'], data: {confirm: "Are you sure?"} %>
 <% end %>
 
-<h2>Last <%= pluralize @game.status[:log_lines], 'line' %> of the log</h2>
-<% if @game.status[:log] %>
-  <pre><%= @game.status[:log].join %></pre>
+<% if @game.status[:log_lines] %>
+  <h2>Last <%= pluralize @game.status[:log_lines], 'line' %> of the log</h2>
+  <% if @game.status[:log] %>
+    <pre><%= @game.status[:log].join %></pre>
+  <% end %>
 <% end %>
