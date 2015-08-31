@@ -16,6 +16,6 @@
     <% end %>
   </p>
 <% end %>
-<% game.status.except(:online).each do |value| %>
+<% game.status.except(:online, :log, :log_lines).each do |value| %>
   <p><strong><%= value[0].to_s.humanize %></strong>: <%= value[1] %></p>
 <% end %>

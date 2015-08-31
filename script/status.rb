@@ -6,6 +6,8 @@
 
 # Screen name assigned to this game
 screen_name = 'XXX'
+log_file = '/tmp/timur.log'
+log_lines = 100
 
 # ============================
 #    Don't touch from here!
@@ -24,7 +26,11 @@ begin
 			result[:warning] = 'Found more than one instance of the game... Not so good...'
 			result[:instances] = screen_pids.length
 		end
-		
+
+    log = IO.popen("cat '#{log_file}' | tail -n #{log_lines}").readlines
+    result[:log] = log
+    result[:log_lines] = log_lines
+
 		result[:online] = true
 	end
 rescue
