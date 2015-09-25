@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/game/new', to: 'game#create'
   delete '/:short_name', to: 'game#destroy'
   get '/:short_name', to: 'game#show', as: 'game'
+  get '/:short_name/status', to: 'game#status', as: 'status'
   get '/:short_name/edit', to: 'game#edit', as: 'edit_game'
   put '/:short_name/edit', to: 'game#update'
   post '/:short_name/start', to: 'game#start', as: 'start_game'

@@ -1,14 +1,18 @@
 class GameController < ApplicationController
-  before_action :fetch_game, only: [:show, :edit, :update, :destroy, :start, :stop]
+  before_action :fetch_game, only: [:show, :status, :edit, :update, :destroy, :start, :stop]
   before_action :get_policy
 
   def show
     @game.get_status(false)
-    @policy = GamePolicy.new(current_user, @game)
     respond_to do |format|
-      format.html
+      format.html { @policy = GamePolicy.new(current_user, @game) }
       format.json { render json: @game.status }
     end
+  end
+
+  def status
+    @game.get_status(false)
+    render partial: 'application/status', locals: {game: @game}
   end
 
   def new

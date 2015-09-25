@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def index
-    @games = Game.all.map(&:get_status)
+    @games = Game.all
   end
 
   protected
