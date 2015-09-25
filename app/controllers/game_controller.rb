@@ -5,6 +5,10 @@ class GameController < ApplicationController
   def show
     @game.get_status(false)
     @policy = GamePolicy.new(current_user, @game)
+    respond_to do |format|
+      format.html
+      format.json { render json: @game.status }
+    end
   end
 
   def new
