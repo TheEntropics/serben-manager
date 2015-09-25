@@ -4,7 +4,9 @@ $ ->
       url: url
       success: (data)->
         $(div).html(data)
-        console.log(div, data)
+      fail: (data)->
+        $(div).html("<br>Error loading</br>")
+        console.error(data)
 
   asyncStatuses = $('.async-status')
   for div in asyncStatuses
