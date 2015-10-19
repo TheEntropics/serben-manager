@@ -1,11 +1,9 @@
 <h1>Available games</h1>
 
 <div class="row">
-  <div class="col-md-6">
-    <div class="list-group">
-      <% @games.each do |game| %>
-        <%= render 'game', game: game %>
-      <% end %>
+  <% @games.each do |game| %>
+    <div class="col-md-6">
+      <%= render 'game', game: game %>
     </div>
-  </div>
+  <% end %>
 </div>
