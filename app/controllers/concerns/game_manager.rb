@@ -1,44 +1,35 @@
 class GameManager
   def self.start_game(game)
-    status = {status: 'error'}
-
-    Rails.logger.info "Executing command: #{game.start_script}"
-    IO.popen(game.start_script) do |f|
-      output = f.readlines(nil)[0]
-      result = JSON.parse(output, symbolize_names: true) rescue {}
-      result[:status] = 'unknown' if result[:status] == nil
-      status = result
-    end rescue nil
-    GameCache.get_cache(game).try :invalidate!
-    Rails.logger.info "Cache invalidated"
-    status
+    begin
+      IO.popen("sudo systemctl start #{game.service_name}")
+      GameCache.get_cache(game).try :invalidate!
+      { status: 'success' }
+    rescue
+      { status: 'error' }
+    end
   end
 
   def self.stop_game(game)
-    status = {status: 'error'}
-
-    Rails.logger.info "Executing command: #{game.stop_script}"
-    IO.popen(game.stop_script) do |f|
-      output = f.readlines(nil)[0]
-      result = JSON.parse(output, symbolize_names: true) rescue {}
-      result[:status] = 'unknown' if result[:status] == nil
-      status = result
-    end rescue nil
-    GameCache.get_cache(game).try :invalidate!
-    Rails.logger.info "Cache invalidated"
-    status
+    begin
+      IO.popen("sudo systemctl stop #{game.service_name}")
+      GameCache.get_cache(game).try :invalidate!
+      { status: 'success' }
+    rescue
+      { status: 'error' }
+    end
   end
 
   def self.get_status(game)
-    status = { online: 'error' }
-
-    Rails.logger.info "Executing command: #{game.status_script}"
-    IO.popen(game.status_script) do |f|
-      output = f.readlines(nil)[0]
-      result = JSON.parse(output, symbolize_names: true) rescue { online: 'error' }
-      result[:online] = 'unknown' if result[:online] == nil
-      status = result
-    end rescue nil
-    status
+    begin
+      IO.popen("sudo systemctl status #{game.service_name}") do |io|
+        res = io.readlines.join
+        return { status: 'error' } unless res.include? 'loaded'
+        return { online: true }    if res.include? 'Active: active (running)'
+        return { online: false }   if res.include? 'Active: inactive (dead)'
+        return { status: 'error' }
+      end
+    rescue
+      { status: 'error' }
+    end
   end
 end

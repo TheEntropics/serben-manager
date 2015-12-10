@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831094710) do
+ActiveRecord::Schema.define(version: 20151210173815) do
 
   create_table "authorizations", force: :cascade do |t|
     t.integer  "user_id"
@@ -38,12 +38,10 @@ ActiveRecord::Schema.define(version: 20150831094710) do
   create_table "games", force: :cascade do |t|
     t.string   "name"
     t.string   "short_name"
-    t.text     "start_script"
-    t.text     "stop_script"
-    t.text     "status_script"
     t.string   "icon"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "service_name"
   end
 
   add_index "games", ["short_name"], name: "index_games_on_short_name"

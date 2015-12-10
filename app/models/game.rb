@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-  validates_presence_of :name, :short_name, :start_script, :stop_script, :status_script
+  validates_presence_of :name, :short_name
   validates_uniqueness_of :short_name
 
   default_scope { order(:name) }

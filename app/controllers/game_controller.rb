@@ -76,6 +76,6 @@ class GameController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :short_name, :start_script, :stop_script, :status_script, :icon)
+    params.require(:game).permit(:name, :short_name, :service_name, :icon)
   end
 end
