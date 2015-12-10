@@ -23,9 +23,10 @@ class GameManager
     begin
       IO.popen("sudo systemctl status #{game.service_name}") do |io|
         res = io.readlines.join
-        return { status: 'error' } unless res.include? 'loaded'
+        return { status: 'game not found' } unless res.include? 'loaded'
         return { online: true }    if res.include? 'Active: active (running)'
         return { online: false }   if res.include? 'Active: inactive (dead)'
+        return { online: false, status: 'deactivating' }   if res.include? 'Active: deactivating (stop)'
         return { status: 'error' }
       end
     rescue
