@@ -24,10 +24,11 @@ class GameManager
       IO.popen("sudo systemctl status #{game.service_name}") do |io|
         res = io.readlines.join
         return { status: 'game not found' } unless res.include? 'loaded'
-        return { online: true }    if res.include? 'Active: active (running)'
-        return { online: false }   if res.include? 'Active: inactive (dead)'
-        return { online: false, status: 'deactivating' }   if res.include? 'Active: deactivating (stop)'
-        return { status: 'error' }
+        status = /Active: ([a-zA-Z\-]+ \([a-zA-Z\-]+\))/.match(res)[1]
+        return { status: status, online: true  } if res.include? 'Active: active'
+        return { status: status, online: false } if res.include? 'Active: inactive'
+        return { status: status, online: false } if res.include? 'Active: deactivating (stop)'
+        return { status: status }
       end
     rescue
       { status: 'error' }

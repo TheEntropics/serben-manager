@@ -31,7 +31,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'pundit'
 
 gem 'carrierwave'
-gem 'rmagick'
+gem 'rmagick', require: false
 
 # Use Unicorn as the app server
 gem 'unicorn'

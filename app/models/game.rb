@@ -12,16 +12,17 @@ class Game < ActiveRecord::Base
   attr_accessor :status
 
   def get_status(use_cache = true)
-    cache = GameCache.get_cache(self)
-    if cache && use_cache
-      @status = cache.status.symbolize_keys
-      Rails.logger.info("Game status from cache")
-      Rails.logger.debug @status.inspect
-    else
-      @status = GameManager.get_status(self)
-      GameCache.create(game: self, status: @status)
-      Rails.logger.debug @status.inspect
-    end
+    # cache = GameCache.get_cache(self)
+    # if cache && use_cache
+    #   @status = cache.status.symbolize_keys
+    #   Rails.logger.info("Game status from cache")
+    #   Rails.logger.debug @status.inspect
+    # else
+    #   @status = GameManager.get_status(self)
+    #   GameCache.create(game: self, status: @status)
+    #   Rails.logger.debug @status.inspect
+    # end
+    @status = GameManager.get_status(self)
     self
   end
 
