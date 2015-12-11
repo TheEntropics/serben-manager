@@ -5,7 +5,7 @@
     <h3><%= game.name %></h3>
   </div>
 
-  <div class="list-group-item-body async-status" data-game-status="<%= status_path(game) %>">
+  <div class="list-group-item-body async-status" data-short-name="<%= game.short_name %>">
     <%= image_tag asset_path('loading_spinner.gif'), class: 'loading_spinner' %>
   </div>
 

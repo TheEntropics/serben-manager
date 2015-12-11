@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/logout', to: 'users#logout', as: 'logout'
 
 
+  get '/status', to: 'game#status_all', as: 'status_all'
   get '/game/new', to: 'game#new', as: 'new_game'
   post '/game/new', to: 'game#create'
   delete '/:short_name', to: 'game#destroy'

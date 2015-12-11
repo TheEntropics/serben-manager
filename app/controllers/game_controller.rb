@@ -3,7 +3,7 @@ class GameController < ApplicationController
   before_action :get_policy
 
   def show
-    @game.get_status(false)
+    @game.get_status
     respond_to do |format|
       format.html { @policy = GamePolicy.new(current_user, @game) }
       format.json { render json: @game.status }
@@ -11,7 +11,7 @@ class GameController < ApplicationController
   end
 
   def status
-    @game.get_status(false)
+    @game.get_status
     render partial: 'application/status', locals: {game: @game}
   end
 
@@ -63,6 +63,14 @@ class GameController < ApplicationController
     redirect_to root_path, alert: 'Not authorized' unless @policy.stop?
     flash[:result] = GameManager.stop_game(@game)
     redirect_to game_path(@game)
+  end
+
+  def status_all
+    status = {}
+    Game.all.each do |game|
+      status[game.short_name] = game.get_status.status
+    end
+    render json: status
   end
 
   protected

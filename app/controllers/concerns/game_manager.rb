@@ -2,7 +2,6 @@ class GameManager
   def self.start_game(game)
     begin
       IO.popen("sudo systemctl start #{game.service_name}")
-      GameCache.get_cache(game).try :invalidate!
       { status: 'success' }
     rescue
       { status: 'error' }
@@ -12,7 +11,6 @@ class GameManager
   def self.stop_game(game)
     begin
       IO.popen("sudo systemctl stop #{game.service_name}")
-      GameCache.get_cache(game).try :invalidate!
       { status: 'success' }
     rescue
       { status: 'error' }
