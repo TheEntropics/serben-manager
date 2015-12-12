@@ -10,7 +10,10 @@ class GameController < ApplicationController
   end
 
   def status
-    render partial: 'application/status', locals: {game: @game}
+    respond_to do |format|
+      format.html { render partial: 'application/status', locals: {game: @game} }
+      format.json { render json: @game.status }
+    end
   end
 
   def new

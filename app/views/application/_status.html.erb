@@ -1,21 +1,4 @@
-<p>
-  <strong>Status</strong>:
-  <% if game.status[:online] === true %>
-    <span class="status-online">
-      <%= image_tag asset_path('online.png'), class: ['status-image'] %> online
-    </span>
-  <% elsif game.status[:online] === false %>
-    <span class="status-offline">
-      <%= image_tag asset_path('offline.png'), class: ['status-image'] %> offline
-    </span>
-  <% else %>
-    <span>
-      <%= image_tag asset_path('error.png'), class: ['status-image'] %>
-      <%= game.status[:status] %>
-    </span>
-  <% end %>
-</p>
-<%- game.status.delete(:status) if game.status[:online] == nil %>
-<% game.status.except(:online, :log, :log_lines).each do |value| %>
-  <p><strong><%= value[0].to_s.humanize %></strong>: <%= value[1] %></p>
-<% end %>
+<div class="game-status">
+  <div class="online"></div>
+  <div class="status"></div>
+</div>

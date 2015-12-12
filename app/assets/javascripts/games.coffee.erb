@@ -1,31 +1,72 @@
 $ ->
-  setStatus = (game, status)->
+  ONLINE_ICO = "<%= asset_path('online.png') %>"
+  OFFLINE_ICO = "<%= asset_path('offline.png') %>"
+  ERROR_ICO = "<%= asset_path('error.png') %>"
 
+  # Humanize a string... https://gist.github.com/cyberfox/1301931
+  humanize = (text)->
+    text.toString().toLowerCase()
+      .replace /[_-]/g, ' '
+      .replace /(?:^|\s)\S/g, (a)->
+        return a.toUpperCase()
 
-  loadStatus = ->
-    ONLINE_ICO = "<%= asset_path('online.png') %>"
-    OFFLINE_ICO = "<%= asset_path('offline.png') %>"
-    ERROR_ICO = "<%= asset_path('error.png') %>"
-
-    setStatus = (game,status)->
-      div = $(".async-status[data-short-name='#{game}']")
-      stat = if status.online == undefined then status.status else if status.online then 'online' else 'offline'
-      img = if status.online == undefined then ERROR_ICO else if status.online then ONLINE_ICO else OFFLINE_ICO
-      content = "
+  # write the online icon with the string
+  setOnline = (div,status)->
+    stat = if status.online == undefined then status.status else if status.online then 'online' else 'offline'
+    img = if status.online == undefined then ERROR_ICO else if status.online then ONLINE_ICO else OFFLINE_ICO
+    content = "
        <p>
          <strong>Status:</strong>
          <span class='status-#{stat}'>
            <img class='status-image' src='#{img}'>
            #{stat}
          </span>
+       </p>
       "
-      div.html(content)
+    div.html(content)
+
+  # write the various properites of the status
+  setStatus = (div,status)->
+    delete status.status if status.online == undefined
+    delete status.online
+
+    div.empty()
+    for key,value of status
+      content = "<p>
+         <strong>#{humanize key}:</strong>
+         #{value}
+       </p>"
+      div.append(content)
+
+  # load the home page with an ajax
+  loadHome = ->
+    return unless window.location.pathname == '/'
+    console.log('load home')
 
     $.ajax
       url: '/status'
       success: (data)->
         for shortName,status of data
-          setStatus(shortName, status)
+          div = $(".async-status[data-short-name='#{shortName}']")
+          setOnline(div, status)
 
-  $(document).ready(loadStatus)
-  $(document).on('page:load', loadStatus)
+    setTimeout(loadHome, 5000)
+
+  # load the page of a game with an ajax
+  loadGame = ->
+    return unless /^\/([^./]+)$/.test(window.location.pathname)
+
+    game = window.location.pathname.match(/^\/([^./]+)$/)[1]
+
+    $.ajax
+      url: "/#{game}/status.json"
+      success: (data)->
+        setOnline($('.game-status .online'), data)
+        setStatus($('.game-status .status'), data)
+
+    setTimeout(loadGame, 5000)
+
+
+  $(document).on 'page:change', ->
+    loadHome()
+    loadGame()
