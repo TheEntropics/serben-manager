@@ -25,6 +25,20 @@ $ ->
       "
     div.html(content)
 
+  setLog = (game)->
+    $.ajax
+      url: "/#{game}/log"
+      success: (data)->
+        $('.logs').css('display', 'block')
+        $('.log-count').text(data.length)
+        table = $('.log-table tbody').empty()
+        for log in data
+          row = $('<tr>')
+            .append("<td>#{log.date}</td>")
+            .append("<td><pre>#{log.message}</pre></td>")
+          table.append(row)
+
+
   # write the various properites of the status
   setStatus = (div,status)->
     delete status.status if status.online == undefined
@@ -54,15 +68,16 @@ $ ->
 
   # load the page of a game with an ajax
   loadGame = ->
-    return unless /^\/([^./]+)$/.test(window.location.pathname)
+    return unless /^\/([^./]+)\/?$/.test(window.location.pathname)
 
-    game = window.location.pathname.match(/^\/([^./]+)$/)[1]
+    game = window.location.pathname.match(/^\/([^./]+)\/?$/)[1]
 
     $.ajax
       url: "/#{game}/status.json"
       success: (data)->
         setOnline($('.game-status .online'), data)
         setStatus($('.game-status .status'), data)
+        setLog(game)
 
     setTimeout(loadGame, 5000)
 

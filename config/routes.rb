@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   put '/:short_name/edit', to: 'game#update'
   post '/:short_name/start', to: 'game#start', as: 'start_game'
   post '/:short_name/stop', to: 'game#stop', as: 'stop_game'
+  get '/:short_name/log', to: 'game#log', as: 'log_game'
 end

@@ -30,18 +30,16 @@
   <%= link_to 'Destroy', game_path(@game), method: :delete, class: ['btn', 'btn-danger'], data: {confirm: "Are you sure?"} %>
 <% end %>
 
-<% if @game.log && @game.log.count > 0 %>
-  <h2>Last <%= pluralize @game.log.count, 'line' %> of the log</h2>
+<div class="logs" style="display: <% (@game.log && @game.log.count > 0) ? 'block' : 'none' %>">
+  <h2>Last <span class="log-count"><%= @game.log.count %></span> lines of the log</h2>
   <table class="table log-table">
-    <tr>
-      <th>Date</th>
-      <th>Event</th>
-    </tr>
-    <% @game.log.each do |entry| %>
+    <thead>
       <tr>
-        <td><%= entry[:date] %></td>
-        <td><pre><%= entry[:message] %></pre></td>
+        <th>Date</th>
+        <th>Event</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+    </tbody>
   </table>
-<% end %>
+</div>

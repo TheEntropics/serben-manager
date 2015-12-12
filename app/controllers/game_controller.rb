@@ -1,5 +1,5 @@
 class GameController < ApplicationController
-  before_action :fetch_game, only: [:show, :status, :edit, :update, :destroy, :start, :stop]
+  before_action :fetch_game, only: [:show, :status, :edit, :update, :destroy, :start, :stop, :log]
   before_action :get_policy
 
   def show
@@ -13,6 +13,12 @@ class GameController < ApplicationController
     respond_to do |format|
       format.html { render partial: 'application/status', locals: {game: @game} }
       format.json { render json: @game.status }
+    end
+  end
+
+  def log
+    respond_to do |format|
+      format.json { render json: @game.log }
     end
   end
 
