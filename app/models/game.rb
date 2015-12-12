@@ -9,11 +9,14 @@ class Game < ActiveRecord::Base
 
   mount_uploader :icon, IconUploader
 
-  attr_accessor :status
+  attr_accessor :status, :log
 
-  def get_status()
-    @status = GameManager.get_status(self)
-    self
+  def status
+    @status ||= GameManager.get_status(self)
+  end
+
+  def log
+    @log ||= GameManager.get_log(self)
   end
 
   def to_param

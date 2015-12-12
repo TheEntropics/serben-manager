@@ -32,4 +32,21 @@ class GameManager
       { status: 'error' }
     end
   end
+
+  def self.get_log(game)
+    begin
+      IO.popen("sudo journalctl -n20 -r --output=json --no-pager -u #{game.service_name}") do |io|
+        lines = io.readlines
+        lines.map do |line|
+          json = JSON.parse(line)
+          {
+              message: json['MESSAGE'],
+              date: Time.at(json['__REALTIME_TIMESTAMP'].to_i/1_000_000).to_datetime.strftime("%d/%m/%Y %H:%M:%S")
+          }
+        end
+      end
+    rescue
+      nil
+    end
+  end
 end
