@@ -1,4 +1,6 @@
 <% content_for :title, 'Available games' %>
-<% @games.each do |game| %>
-  <%= render 'game', game: game %>
-<% end %>
+<div class="index-container">
+  <% @games.each do |game| %>
+    <%= render 'game', game: game %>
+  <% end %>
+</div>
