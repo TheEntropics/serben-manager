@@ -2,15 +2,15 @@
 <% content_for :prev_page, root_path %>
 
 <%= form_tag login_path, method: :post do %>
-  <div>
-    <%= label_tag :username %>
-    <%= text_field_tag :username %>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <%= label_tag :username, 'Username', class: 'mdl-textfield__label' %>
+    <%= text_field_tag :username, '', class: 'mdl-textfield__input' %>
   </div>
-  <div>
-    <%= label_tag :password %>
-    <%= password_field_tag :password %>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <%= label_tag :password, 'Password', class: 'mdl-textfield__label' %>
+    <%= password_field_tag :password, '', class: 'mdl-textfield__input' %>
   </div>
-  <%= submit_tag 'Login' %>
+  <%= submit_tag 'Login', class: ['mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-900 mdl-color-text--white'] %>
 <% end %>
 
 <% if flash[:login] %>
