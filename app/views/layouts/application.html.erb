@@ -11,44 +11,43 @@
 <body>
 
 <div id="master">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="<%= root_path %>">Serben Manager</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <% if GamePolicy.new(current_user, nil).create? %>
-            <li><%= link_to 'New Game', new_game_path %></li>
-          <% end %>
-        </ul>
-        <% if current_user %>
-          <p class="navbar-text navbar-right">
-            Signed in as <%= current_user.username %>.
-            <%= link_to 'Logout', logout_path, method: :post %>
-          </p>
-        <% else %>
-          <p class="navbar-text navbar-right"><%= link_to 'Login', login_path %></p>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <% unless current_page? root_path %>
+          <a class="mdl-layout-title" href="<%= yield(:prev_page) || root_path %>"><i class="material-icons">arrow_back</i>&nbsp;</a>
         <% end %>
+        <a class="mdl-layout-title" href="<%= yield(:prev_page) || root_path %>"><%= yield :title %></a>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <% if GamePolicy.new(current_user, nil).create? %>
+            <%= link_to 'New Game', new_game_path, class: 'mdl-navigation__link' %>
+          <% end %>
+          <% if current_user %>
+              <span class="mdl-navigation__text">
+                Signed in as <%= current_user.username %>.
+                <%= link_to 'Logout', logout_path, method: :post, class: ['mdl-navigation__link', 'logout'] %>
+              </span>
+          <% else %>
+              <%= link_to 'Login', login_path, class: 'mdl-navigation__link' %>
+          <% end %>
+        </nav>
       </div>
-    </div>
-  </nav>
-  <div class="container">
-    <% if flash[:alert] %>
-      <h3 class="error"><%= flash[:alert] %></h3>
-    <% end %>
-    <%= yield %>
+    </header>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--12-col">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 </div>
-<footer class="navbar">
-  <div class="container">
-    <p class="navbar-text">Copyright © 2015 The Entropics</p>
+<footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">Copyright © 2015 The Entropics</div>
   </div>
 </footer>
 </body>

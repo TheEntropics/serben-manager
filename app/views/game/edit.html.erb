@@ -1,8 +1,6 @@
-<h1>Editing Game</h1>
+<% content_for :title, 'Edit game' %>
+<% content_for :prev_page, game_path(@game) %>
 
 <%= form_for @game, url: edit_game_path(@game), method: :put, html: {multipart: true} do |f| %>
   <%= render 'form', game: @game, f: f %>
 <% end %>
-
-<%= link_to 'Show', @game %> |
-<%= link_to 'Back', root_path %>

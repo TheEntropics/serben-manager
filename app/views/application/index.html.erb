@@ -1,9 +1,4 @@
-<h1>Available games</h1>
-
-<div class="row">
-  <% @games.each do |game| %>
-    <div class="col-md-6">
-      <%= render 'game', game: game %>
-    </div>
-  <% end %>
-</div>
+<% content_for :title, 'Available games' %>
+<% @games.each do |game| %>
+  <%= render 'game', game: game %>
+<% end %>

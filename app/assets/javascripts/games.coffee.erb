@@ -29,13 +29,14 @@ $ ->
     $.ajax
       url: "/#{game}/log"
       success: (data)->
-        $('.logs').css('display', 'block')
+        if data.length > 0
+          $('.logs').css('display', 'block')
         $('.log-count').text(data.length)
         table = $('.log-table tbody').empty()
         for log in data
           row = $('<tr>')
-            .append("<td>#{log.date}</td>")
-            .append("<td><pre>#{log.message}</pre></td>")
+            .append("<td class='mdl-data-table__cell--non-numeric'>#{log.date}</td>")
+            .append("<td class='mdl-data-table__cell--non-numeric'>#{log.message.substring(0, 500)}</td>")
           table.append(row)
 
 
@@ -85,3 +86,4 @@ $ ->
   $(document).on 'page:change', ->
     loadHome()
     loadGame()
+    componentHandler.upgradeDom()

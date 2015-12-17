@@ -39,11 +39,12 @@ class GameManager
         lines = io.readlines
         lines.map do |line|
           json = JSON.parse(line)
+          next unless json['MESSAGE'].is_a? String
           {
               message: json['MESSAGE'],
               date: Time.at(json['__REALTIME_TIMESTAMP'].to_i/1_000_000).to_datetime.strftime("%d/%m/%Y %H:%M:%S")
           }
-        end
+        end.compact
       end
     rescue
       nil

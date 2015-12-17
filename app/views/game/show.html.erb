@@ -1,42 +1,37 @@
-<h1><%= @game.name %></h1>
-<div class="row">
-  <div class="col-sm-3">
+<% content_for :title, @game.name %>
+<% content_for :prev_page, root_path %>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--3-col">
     <div class="thumbnail">
       <img src="<%= @game.icon.url %>" class="game-icon-big">
     </div>
   </div>
-  <div class="col-sm-9">
+  <div class="mdl-cell mdl-cell--9-col">
     <%= render 'status', game: @game %>
   </div>
 </div>
-<% if flash[:result] %>
-  <div class="alert alert-info">
-    <% flash[:result].each do |k| %>
-      <strong><%= k[0].to_s.humanize %></strong>: <%= k[1] %><br>
-    <% end %>
-  </div>
-<% end %>
 
 <% if @policy.start? %>
-  <%= link_to 'Start', start_game_path(@game), method: :post, class: ['btn', 'btn-success'] %>
+  <%= link_to 'Start', start_game_path(@game), method: :post, class: ['mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--green-600 mdl-color-text--white'] %>
 <% end %>
 <% if @policy.stop? %>
-  <%= link_to 'Stop', stop_game_path(@game), method: :post, class: ['btn', 'btn-danger'] %>
+  <%= link_to 'Stop', stop_game_path(@game), method: :post, class: ['mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-600 mdl-color-text--white'] %>
 <% end %>
 <% if @policy.update? %>
-  <%= link_to 'Edit', edit_game_path(@game), class: ['btn', 'btn-warning'] %>
+  <%= link_to 'Edit', edit_game_path(@game), class: ['mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-600 mdl-color-text--white'] %>
 <% end %>
 <% if @policy.destroy? %>
-  <%= link_to 'Destroy', game_path(@game), method: :delete, class: ['btn', 'btn-danger'], data: {confirm: "Are you sure?"} %>
+  <%= link_to 'Destroy', game_path(@game), method: :delete, class: ['mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--red-900 mdl-color-text--white'], data: {confirm: "Are you sure?"} %>
 <% end %>
 
-<div class="logs" style="display: <% (@game.log && @game.log.count > 0) ? 'block' : 'none' %>">
-  <h2>Last <span class="log-count"><%= @game.log.count %></span> lines of the log</h2>
-  <table class="table log-table">
+<div class="logs" style="display: <%= (@game.log && @game.log.count > 0) ? 'block' : 'none' %>">
+  <h3>Last <span class="log-count"><%= @game.log.count %></span> lines of the log</h3>
+  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp log-table">
     <thead>
       <tr>
-        <th>Date</th>
-        <th>Event</th>
+        <th class="mdl-data-table__cell--non-numeric">Date</th>
+        <th class="mdl-data-table__cell--non-numeric">Event</th>
       </tr>
     </thead>
     <tbody>

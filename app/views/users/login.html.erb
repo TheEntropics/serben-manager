@@ -1,4 +1,6 @@
-<h1>Login</h1>
+<% content_for :title, 'Login' %>
+<% content_for :prev_page, root_path %>
+
 <%= form_tag login_path, method: :post do %>
   <div>
     <%= label_tag :username %>

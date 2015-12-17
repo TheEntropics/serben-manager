@@ -10,28 +10,30 @@
   </div>
 <% end %>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="form_group">
-      <%= f.label :name %><br>
-      <%= f.text_field :name, class: 'form-control' %>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--6-col">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.label :name, class: 'mdl-textfield__label' %><br>
+      <%= f.text_field :name, class: 'mdl-textfield__input' %>
     </div>
-    <div class="form_group">
-      <%= f.label :short_name %><br>
-      <%= f.text_field :short_name, class: 'form-control' %>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.label :short_name, class: 'mdl-textfield__label' %><br>
+      <%= f.text_field :short_name, class: 'mdl-textfield__input' %>
     </div>
-    <div class="form_group">
-      <%= f.label :service_name %><br>
-      <%= f.text_area :service_name, class: 'form-control' %>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.label :service_name, class: 'mdl-textfield__label' %><br>
+      <%= f.text_field :service_name, class: 'mdl-textfield__input' %>
     </div>
-    <div class="form-group">
-      <%= f.label :icon %><br>
-      <%= image_tag(game.icon.url) if game.icon? %>
-      <%= f.file_field :icon %>
+    <div>
+      <%= image_tag(game.icon.url) if game.icon? %><br>
+      <label for="game_icon" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--blue-600 mdl-color-text--white">
+        Carica immagine
+      </label>
+      <%= f.file_field :icon, class: 'file-picker' %><br><br>
       <%= f.hidden_field :icon_cache %>
     </div>
-    <div class="actions form-group">
-      <%= f.submit class: ['btn', 'btn-success'] %>
+    <div>
+      <%= f.submit class: ['mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-900 mdl-color-text--white'] %>
     </div>
   </div>
 </div>
