@@ -17,7 +17,7 @@ $ ->
     content = "
        <p>
          <strong>Status:</strong>
-         <span class='status-#{stat}'>
+         <span class='status-#{stat.replace(/\s+/g, '')}'>
            <img class='status-image' src='#{img}'>
            #{stat}
          </span>
@@ -89,5 +89,5 @@ $ ->
     componentHandler.upgradeDom()
     $('.grid').masonry
       itemSelector: '.card-container'
-      columnWidth: 175
+      columnWidth: 40
       isFitWidth: true
