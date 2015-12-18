@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
 <div id="master">
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
@@ -20,9 +19,6 @@
         <a class="mdl-layout-title" href="<%= yield(:prev_page) || root_path %>"><%= yield :title %></a>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <% if GamePolicy.new(current_user, nil).create? %>
-            <%= link_to 'New Game', new_game_path, class: 'mdl-navigation__link' %>
-          <% end %>
           <% if current_user %>
               <span class="mdl-navigation__text">
                 Signed in as <%= current_user.username %>.
@@ -31,6 +27,25 @@
           <% else %>
               <%= link_to 'Login', login_path, class: 'mdl-navigation__link' %>
           <% end %>
+        </nav>
+        <nav class="mdl-navigation mdl-layout--small-screen-only">
+          <button id="mobile-menu" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="mobile-menu">
+            <% if current_user %>
+              <li disabled class="mdl-color-text--grey-500 mdl-menu__item">
+                Signed in as <%= current_user.username %>.
+              </li>
+              <li class="mdl-color-text--blue-grey-700 mdl-menu__item">
+                <%= link_to 'Logout', logout_path, method: :post, class: ['mdl-color-text--blue-grey-700', 'mdl-navigation__link', 'logout'] %>
+              </li>
+            <% else %>
+              <li class="mdl-menu__item">
+                <%= link_to 'Login', login_path, class: ['mdl-color-text--blue-grey-700', 'mdl-navigation__link'] %>
+              </li>
+            <% end %>
+          </ul>
         </nav>
       </div>
     </header>
@@ -50,5 +65,10 @@
     <div class="mdl-logo">Copyright © 2015 The Entropics</div>
   </div>
 </footer>
+<% if GamePolicy.new(current_user, nil).create? %>
+  <%= link_to new_game_path, class: ['mdl-button', 'mdl-js-button', 'mdl-button--fab', 'mdl-js-ripple-effect', 'mdl-button--colored'], id: 'btn-add' do %>
+    <i class="material-icons">add</i>
+  <% end %>
+<% end %>
 </body>
 </html>
