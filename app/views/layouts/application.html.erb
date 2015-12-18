@@ -57,14 +57,14 @@
           </div>
         </div>
       </div>
+      <footer class="mdl-mini-footer">
+        <div class="mdl-mini-footer__left-section">
+          <div class="mdl-logo">Copyright © 2015 The Entropics</div>
+        </div>
+      </footer>
     </main>
   </div>
 </div>
-<footer class="mdl-mini-footer">
-  <div class="mdl-mini-footer__left-section">
-    <div class="mdl-logo">Copyright © 2015 The Entropics</div>
-  </div>
-</footer>
 <% if GamePolicy.new(current_user, nil).create? %>
   <%= link_to new_game_path, class: ['mdl-button', 'mdl-js-button', 'mdl-button--fab', 'mdl-js-ripple-effect', 'mdl-button--colored'], id: 'btn-add' do %>
     <i class="material-icons">add</i>
