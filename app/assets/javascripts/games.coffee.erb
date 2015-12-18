@@ -87,3 +87,7 @@ $ ->
     loadHome()
     loadGame()
     componentHandler.upgradeDom()
+    $('.grid').masonry
+      itemSelector: '.card-container'
+      columnWidth: 175
+      isFitWidth: true
