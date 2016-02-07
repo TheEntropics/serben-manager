@@ -75,7 +75,12 @@ class GameController < ApplicationController
   def status_all
     status = {}
     Game.all.each do |game|
-      status[game.short_name] = game.status
+      status[game.short_name] = {
+          status: game.status,
+          short_name: game.short_name,
+          full_name: game.name,
+          image: game.icon.url
+      }
     end
     render json: status
   end
